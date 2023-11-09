@@ -14,9 +14,14 @@ class Window_Code(QMainWindow):
         uic.loadUi('cod_decod.ui', self)
         self.cod_button.clicked.connect(self.cod_mess)
         self.decod_button.clicked.connect(self.decod_mess)
+        self.code_table = {}
 
     def cod_mess(self):
-        pass
+        message_new = self.lineEdit.text()
+        message_cod = ''
+        for i in message_new:
+            message_cod += self.code_table[i]
+        self.lineEdit_2.setText(message_cod)
 
     def decod_mess(self):
         pass
