@@ -14,15 +14,25 @@ class Window_Code(QMainWindow):
         uic.loadUi('cod_decod.ui', self)
         self.cod_button.clicked.connect(self.cod_mess)
         self.decod_button.clicked.connect(self.decod_mess)
-        self.code_table = {}
+        self.tableWidget.itemChanged.connect(self.item_changed)
+
+        self.tableWidget.setColumnCount(8)
+        self.tableWidget.setRowCount(2)
+        self.code_table = {
+            'А': '0', 'Б': '00', 'В': '1', 'Г': '11', 'Д': '000'}
 
     def cod_mess(self):
         message_new = self.lineEdit.text()
         message_cod = ''
         for i in message_new:
-            message_cod += self.code_table[i]
+            message_cod += self.code_table[i.upper()]
         self.lineEdit_2.setText(message_cod)
 
+
+    def item_changed(self, item):
+        # Если значение в ячейке было изменено,
+
+        self.code_table[self.titles[item.column()]] = item.text()
     def decod_mess(self):
         pass
 
